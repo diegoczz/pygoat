@@ -97,7 +97,7 @@ jobs:
         continue-on-error: true
 
       # ============================================
-      # VERIFICACIÓN DE REPORTES
+      # VERIFICACION DE REPORTES
       # ============================================
       - name: Check generated reports
         if: always()
