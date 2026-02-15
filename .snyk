@@ -1,0 +1,291 @@
+# Archivo de gestión de excepciones Snyk - PyCorp DevSecOps
+# Autor: diegoczz
+# Proyecto: PyGoat - Entorno de laboratorio docente
+# Fecha: 2026-02-15
+#
+# CONTEXTO: PyGoat es una aplicación intencionalmente vulnerable
+# usada para formación en seguridad. Las siguientes vulnerabilidades
+# se aceptan como riesgo documentado para este entorno de laboratorio.
+# NO aplicar estas excepciones en entornos de producción.
+
+version: v1.25.0
+
+ignore:
+  # ─────────────────────────────────────────────────────────────
+  # EXCEPCIÓN 1: Django - Múltiples vulnerabilidades de versión antigua
+  # Paquete: django (versión usada por PyGoat por diseño)
+  # Justificación: PyGoat usa Django 2.x intencionalmente para
+  # exponer vulnerabilidades históricas como material didáctico.
+  # Actualizar Django rompería los laboratorios de la práctica.
+  # Ticket: LAB-SEC-001 | Expira: 2026-08-01
+  # ─────────────────────────────────────────────────────────────
+  SNYK-PYTHON-DJANGO-5750790:
+    - '*':
+        reason: >
+          PyGoat usa Django vulnerable por diseño educativo.
+          Riesgo aceptado para entorno de laboratorio docente.
+          No aplicar en producción.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-5880505:
+    - '*':
+        reason: >
+          Vulnerabilidad de ReDoS en Django. Aceptada en laboratorio
+          porque PyGoat requiere esta versión para los ejercicios
+          de inyección y bypass de autenticación.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-6230369:
+    - '*':
+        reason: >
+          Open Redirect en Django. Riesgo documentado y aceptado.
+          Esta vulnerabilidad forma parte del material de estudio
+          de la práctica DevSecOps de PyCorp.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-7642814:
+    - '*':
+        reason: >
+          Vulnerabilidad en Django aceptada para laboratorio docente.
+          El entorno no está expuesto a internet y el riesgo
+          de explotación real es nulo en este contexto.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-8456315:
+    - '*':
+        reason: >
+          Riesgo aceptado. PyGoat es una aplicación de laboratorio
+          cuyo propósito es ser vulnerable. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-8456316:
+    - '*':
+        reason: >
+          Riesgo aceptado. PyGoat es una aplicación de laboratorio
+          cuyo propósito es ser vulnerable. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-9296408:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. La vulnerabilidad
+          no es explotable en el contexto de red aislada del laboratorio.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-12485156:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-13179425:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-13837025:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-14157807:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-14157810:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-15183335:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-15198931:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGO-15198932:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-001.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  # ─────────────────────────────────────────────────────────────
+  # EXCEPCIÓN 2: Pillow - Vulnerabilidades de procesamiento de imagen
+  # Paquete: Pillow (librería de imágenes de Python)
+  # Justificación: PyGoat usa Pillow para laboratorios de subida
+  # de ficheros maliciosos. La versión vulnerable es necesaria
+  # para que los ejercicios de file upload funcionen correctamente.
+  # Ticket: LAB-SEC-002 | Expira: 2026-08-01
+  # ─────────────────────────────────────────────────────────────
+  SNYK-PYTHON-PILLOW-5918878:
+    - '*':
+        reason: >
+          Pillow vulnerable requerido para laboratorios de file upload
+          malicioso en PyGoat. Riesgo aceptado en entorno de laboratorio
+          aislado. Ticket LAB-SEC-002.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PILLOW-6043904:
+    - '*':
+        reason: >
+          Heap overflow en Pillow. Aceptado en entorno docente aislado.
+          No explotable en condiciones de red del laboratorio.
+          Ticket LAB-SEC-002.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PILLOW-6182918:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-002.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PILLOW-6219984:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-002.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PILLOW-6219986:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-002.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  # ─────────────────────────────────────────────────────────────
+  # EXCEPCIÓN 3: PyYAML - Deserialización insegura
+  # Justificación: Dependencia transitiva de PyGoat. No utilizada
+  # directamente por la aplicación en el contexto del laboratorio.
+  # Ticket: LAB-SEC-003 | Expira: 2026-08-01
+  # ─────────────────────────────────────────────────────────────
+  SNYK-PYTHON-PYYAML-550022:
+    - '*':
+        reason: >
+          Deserialización insegura en PyYAML. Dependencia transitiva
+          no explotable en el contexto del laboratorio docente.
+          Ticket LAB-SEC-003.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PYYAML-559098:
+    - '*':
+        reason: >
+          Riesgo aceptado. Dependencia transitiva en entorno aislado.
+          Ticket LAB-SEC-003.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-PYYAML-590151:
+    - '*':
+        reason: >
+          Riesgo aceptado. Dependencia transitiva en entorno aislado.
+          Ticket LAB-SEC-003.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  # ─────────────────────────────────────────────────────────────
+  # EXCEPCIÓN 4: Cryptography - Vulnerabilidades criptográficas
+  # Justificación: Versión requerida por dependencias de PyGoat.
+  # Ticket: LAB-SEC-004 | Expira: 2026-08-01
+  # ─────────────────────────────────────────────────────────────
+  SNYK-PYTHON-CRYPTOGRAPHY-1022152:
+    - '*':
+        reason: >
+          Vulnerabilidad en librería cryptography. Riesgo aceptado
+          en entorno de laboratorio docente aislado. Ticket LAB-SEC-004.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-CRYPTOGRAPHY-6126975:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-004.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-CRYPTOGRAPHY-7886970:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-004.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-CRYPTOGRAPHY-15263096:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-004.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  # ─────────────────────────────────────────────────────────────
+  # EXCEPCIÓN 5: Otras dependencias
+  # ─────────────────────────────────────────────────────────────
+  SNYK-PYTHON-CERTIFI-5805047:
+    - '*':
+        reason: >
+          Certificados desactualizados en entorno de laboratorio aislado.
+          Sin acceso a internet real, el riesgo es nulo. Ticket LAB-SEC-005.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-SQLPARSE-6615674:
+    - '*':
+        reason: >
+          Vulnerabilidad en sqlparse. Riesgo aceptado en laboratorio docente.
+          Ticket LAB-SEC-005.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-SQLPARSE-14157217:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-005.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGOALLAUTH-5406296:
+    - '*':
+        reason: >
+          Vulnerabilidad en django-allauth. Riesgo aceptado en laboratorio.
+          Ticket LAB-SEC-005.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+  SNYK-PYTHON-DJANGOALLAUTH-14425069:
+    - '*':
+        reason: >
+          Riesgo aceptado para entorno docente. Ticket LAB-SEC-005.
+        expires: '2026-08-01T00:00:00.000Z'
+        created: '2026-02-15T00:00:00.000Z'
+
+patch: {}
