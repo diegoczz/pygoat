@@ -1,4 +1,4 @@
-name: DevSecOps - Pipeline
+name: DevSecOps Pipeline
 
 on:
   push:
@@ -78,7 +78,7 @@ jobs:
       - name: Run PyGoat
         run: |
           docker run -d --name pygoat --network host pygoat/pygoat:latest
-          echo "⏳ Esperando 30 segundos..."
+          echo "Esperando 30 segundos..."
           sleep 30
 
       - name: Run ZAP
@@ -87,7 +87,7 @@ jobs:
             zaproxy/zap-stable \
             zap.sh -daemon -host 0.0.0.0 -port 8080 \
             -config api.key=${{ secrets.ZAP_API_KEY }}
-          echo "⏳ Esperando 30 segundos..."
+          echo "Esperando 30 segundos..."
           sleep 30
 
       - name: ZAP Scan
@@ -103,9 +103,21 @@ jobs:
         if: always()
         run: |
           echo "=== VERIFICANDO REPORTES ==="
-          ls -la snyk-report.html && echo "✅ snyk-report.html OK" || echo "⚠️ snyk-report.html NO generado"
-          ls -la zap-report.html && echo "✅ zap-report.html OK" || echo "⚠️ zap-report.html NO generado"
+          ls -la snyk-report.html && echo "snyk-report.html OK" || echo "snyk-report.html NO generado"
+          ls -la zap-report.html && echo "zap-report.html OK" || echo "zap-report.html NO generado"
           echo "============================="
+
+      # ============================================
+      # PERMISOS Y RUTA ABSOLUTA PARA ARTIFACTS
+      # ============================================
+      - name: Fix report permissions
+        if: always()
+        run: |
+          chmod 644 snyk-report.html || true
+          chmod 644 zap-report.html || true
+          echo "Ruta workspace: ${{ github.workspace }}"
+          ls -la ${{ github.workspace }}/snyk-report.html || true
+          ls -la ${{ github.workspace }}/zap-report.html || true
 
       # ============================================
       # ARTIFACTS
@@ -115,7 +127,8 @@ jobs:
         if: always()
         with:
           name: snyk-report
-          path: snyk-report.html
+          path: ${{ github.workspace }}/snyk-report.html
+          retention-days: 7
           if-no-files-found: warn
 
       - name: Upload ZAP Report
@@ -123,11 +136,12 @@ jobs:
         if: always()
         with:
           name: zap-report
-          path: zap-report.html
+          path: ${{ github.workspace }}/zap-report.html
+          retention-days: 7
           if-no-files-found: warn
 
       # ============================================
-      # FASE 4: BUILD DOCKER (solo si éxito)
+      # BUILD DOCKER (solo si exito)
       # ============================================
       - name: Build Docker image
         if: success()
@@ -138,14 +152,14 @@ jobs:
           docker images | grep pygoat
 
       # ============================================
-      # FASE 4: NOTIFICACIÓN FINAL
+      # NOTIFICACION FINAL
       # ============================================
-      - name: Notificación
+      - name: Notificacion
         if: always()
         run: |
           echo "========================================"
-          echo "🚀 PyGoat v1.x: Superadas pruebas de seguridad"
-          echo "📦 Imagen Docker: pygoat:final"
-          echo "📊 Reportes disponibles en artifacts"
-          echo "✅ Listo para despliegue en Producción"
+          echo "PyGoat v1.x: Superadas pruebas de seguridad"
+          echo "Imagen Docker: pygoat-pycorp:1.0"
+          echo "Reportes disponibles en artifacts"
+          echo "Listo para despliegue en Produccion"
           echo "========================================"
